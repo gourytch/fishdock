@@ -1,5 +1,6 @@
 from aiohttp import web
 
+
 async def handle_stub(request):
     return web.Response(text='stub handler called')
 

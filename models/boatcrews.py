@@ -1,6 +1,7 @@
 import dataclasses
 import datetime
 
+
 class CrewMember(dataclasses.dataclass(frozen=True)):
     """
     Первичный документ: Член Команды Рыболовецкого Судна

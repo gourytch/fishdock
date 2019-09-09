@@ -1,6 +1,7 @@
 import dataclasses
 import datetime
 
+
 class Boat(dataclasses.dataclass(frozen=True)):
     passport_id: str  # паспортный идентификатор катера
     name: str  # название катера

@@ -1,4 +1,4 @@
-eve
 aiohttp
+aiohttp-swagger
+pycodestyle
 pytest
-pep8
