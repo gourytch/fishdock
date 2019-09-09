@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  description: Login API
+  title: login
+  version: 1.0
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/auth/login:
+    post:
+      summary: Вход в систему
+      description: |
+        Регистрация пользователя в системе
+        Начало нового сеанса работы.
+        Получение токена авторизации.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        200:
+          description: Пользователь зарегистрирован
+          schema:
+            $ref: '#/definitions/LoginSuccessResponse'
+        400:
+          description: Неверно сформированный запрос
+          schema:
+            $ref: '#/definitions/LoginErrorResponse'
+        403:
+          description: Пользователь не зарегистрирован
+          schema:
+            $ref: '#/definitions/LoginErrorResponse'
+  /v1/auth/logout:
+    post:
+      summary: Выход из системы
+      description: |
+        Завершение работы пользователя в системе.
+        Инвалидация токена.
+    responses:
+      200:
+        description: Пользователь завершил работу в системе
+      403:
+        description: Пользователь не был зарегистрирован
+        schema:
+          $ref: '#/definitions/LoginErrorResponse'
+definitions:
+  LoginRequest:
+    type: object
+    required:
+      - user
+      - auth
+    additionalProperties: false
+    properties:
+      user:
+        description: Регистрациронное имя пользователя в системе
+        type: string
+        minLenght: 1
+      auth:
+        description: хеш от имени и пароля пользователя
+        type: string
+        minLength: 16
+      role:
+        description: опцирональное поле - роль пользователя (user/admin)
+        anyOf:
+          - type: string
+          - type: "null"
+  LoginSuccessResponse:
+    type: object
+    required:
+      - user_id
+      - token
+      - role
+    additionalProperties: false
+    properties:
+      user_id:
+        description: идентификатор пользователя в системе
+        type: int
+      token:
+        description: токен авторизации
+        type: string
+      role:
+        description: текущая роль пользователя в данном сеансе
+        type: string
+  LoginErrorResponse:
+    type: object
+    required:
+      - message
+    additionalProperties: false
+    properties:
+      message:
+        description: описание ошибки
+        type: string
+

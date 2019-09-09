@@ -1,4 +1,7 @@
 aiohttp
+aiohttp-session[secure]
 aiohttp-swagger
+cryptography
 pycodestyle
 pytest
+swagger-tester

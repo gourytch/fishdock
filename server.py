@@ -1,10 +1,12 @@
 from aiohttp import web
+from common import application
 
 
 async def handle_stub(request):
     return web.Response(text='stub handler called')
 
-app = web.Application()
+
+app = application.Application()
 app.add_routes([
     web.get('/', handle_stub)
 ])
