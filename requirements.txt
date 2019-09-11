@@ -1,6 +1,7 @@
 aiohttp
 aiohttp-session[secure]
 aiohttp-swagger
+asyncpg
 cryptography
 pycodestyle
 pytest
